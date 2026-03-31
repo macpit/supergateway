@@ -133,8 +133,9 @@ export async function stdioToSse(args: StdioToSseArgs) {
 
     const cleanupSession = () => {
       if (sessionId && sessions[sessionId]) {
-        sessions[sessionId].server.close().catch(() => {})
+        const session = sessions[sessionId]
         delete sessions[sessionId]
+        session.server.close().catch(() => {})
       }
     }
 
